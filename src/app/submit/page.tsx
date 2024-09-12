@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Confetti from "react-confetti";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,12 @@ const Submit = () => {
   const { setAccountDetails } = useAccountDetailsState();
   const { setPreferences } = usePreferencesState();
   const { setStepId } = useStepIdStore();
+
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleResubmit = () => {
     setPersonalInfo({
@@ -54,12 +60,14 @@ const Submit = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <Confetti
-        width={window.innerWidth}
-        height={window.innerHeight}
-        recycle={false}
-        numberOfPieces={200}
-      />
+      {isClient && (
+        <Confetti
+          width={window.innerWidth}
+          height={window.innerHeight}
+          recycle={false}
+          numberOfPieces={200}
+        />
+      )}
       <h1 className="text-4xl font-bold mb-4">Congratulations!</h1>
       <p className="text-xl mb-8">You have submitted successfully.</p>
       <Button onClick={handleResubmit}>Resubmit</Button>
