@@ -17,7 +17,7 @@ A dynamic and responsive user registration form built with Next.js, React, and T
 
 - Node.js (v14 or later)
 - npm or yarn
-- MongoDB database
+
 
 ### Installation
 
