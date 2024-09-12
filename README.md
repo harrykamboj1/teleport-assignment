@@ -9,7 +9,7 @@ A dynamic and responsive user registration form built with Next.js, React, and T
 - State management using Zustand
 - Form validation with Zod
 - Responsive design with Tailwind CSS
-- Backend integration with Next.js API routes and MongoDB
+- Backend integration with Next.js API routes
 
 ## Getting Started
 
@@ -36,13 +36,9 @@ A dynamic and responsive user registration form built with Next.js, React, and T
    yarn install
    ```
 
-3. Set up environment variables:
-   Create a `.env.local` file in the root directory and add your MongoDB connection string:
-   ```bash
-   MONGODB_URI=your_mongodb_connection_string
-   ```
 
-4. Run the development server:
+
+3. Run the development server:
    ```bash
    npm run dev
    ```
@@ -51,13 +47,13 @@ A dynamic and responsive user registration form built with Next.js, React, and T
    yarn dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
 ## Project Structure
 
 - `/src/app`: Next.js app router components
 - `/src/components`: Reusable React components
-- `/src/lib`: Utility functions and database connection
+- `/src/lib`: Utility functions
 - `/src/store`: Zustand store for state management
 - `/src/schemas`: Zod schemas for form validation
 - `/pages/api`: Next.js API routes for backend logic
@@ -75,7 +71,3 @@ A dynamic and responsive user registration form built with Next.js, React, and T
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
