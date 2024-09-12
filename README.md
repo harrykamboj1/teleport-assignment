@@ -2,6 +2,9 @@
 
 A dynamic and responsive user registration form built with Next.js, React, and TypeScript. This project demonstrates a multi-step registration process with state management, form validation, and backend integration.
 
+![image](https://github.com/user-attachments/assets/cac26b5e-d360-41b6-a38f-660a80866884)
+
+
 ## Features
 
 - Multi-step registration process
