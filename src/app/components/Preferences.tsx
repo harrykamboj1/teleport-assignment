@@ -1,5 +1,10 @@
-import React from "react";
-import { usePreferencesState, useStepIdStore } from "../store/store";
+import React, { useState } from "react";
+import {
+  useAccountDetailsState,
+  usePersonalInfoState,
+  usePreferencesState,
+  useStepIdStore,
+} from "../store/store";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -39,6 +44,9 @@ interface PreferencesProp {
 const Preferences = () => {
   const { decrease } = useStepIdStore();
   const { setPreferences } = usePreferencesState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const router = useRouter();
 
   const {
@@ -52,9 +60,38 @@ const Preferences = () => {
     defaultValues: usePreferencesState(),
   });
 
-  const onSubmit = (data: PreferencesProp) => {
-    console.log(data);
+  const onSubmit = async (data: PreferencesProp) => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
     setPreferences(data);
+
+    const formData = {
+      personalInfo: usePersonalInfoState.getState(),
+      accountDetails: useAccountDetailsState.getState(),
+      preferences: usePreferencesState.getState(),
+    };
+
+    const response = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit data");
+    }
+    setPreferences(data);
+    router.push("/submit");
+    try {
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      setSubmitError("Failed to submit data. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
     router.push("/submit");
   };
 
@@ -222,8 +259,11 @@ const Preferences = () => {
           type="submit"
           className="px-4 py-2 bg-blue-600 text-white rounded"
         >
-          Next
+          {isSubmitting ? "Submitting...." : "Submit"}
         </Button>
+        {submitError && (
+          <p className="text-red-500 text-sm mt-2">{submitError}</p>
+        )}
       </div>
     </form>
   );
